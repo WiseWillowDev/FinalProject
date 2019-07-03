@@ -50,13 +50,13 @@
         <form th:action="@{/NewItem}" th:method="get">
             
                 <button class ="btn btn-lg btn-danger center-block" name="Submit"
-                value="Login" type="Submit">Click to create new item!</button>
+                type="Submit">Click to create new item!</button>
         </form>
         
         <form th:action="@{/completed}" th:method="get">
         
         <button class ="btn btn-lg btn-danger center-block" name="Submit"
-                value="Login" type="Submit">Click to check completed!</button>
+                 type="Submit">Click to check completed!</button>
 			
 			
 		</form>
@@ -64,6 +64,19 @@
 <h4><span th:text="${time}"></span></h4>
 
 <div th:each="item:${Items}">
+	<p> ID: <span th:text="*{item.id}"></span></p>
+	<p> Title: <span th:text="*{item.title}"></span></p>
+	<p> Description: <span th:text="*{item.description}"></span></p>
+	<p> Status: <span th:text="*{item.status}"></span></p>
+	<p> Deadline: <span th:text="*{item.deadline}"></span></p>
+	
+	<form th:method="put" th:action="@{'/completed/{id}'(id=${item.id})}">
+	<input type="checkbox"  onChange="submit()"/>
+                 <label th:text="${item.status}"></label>
+                 </form>
+</div>
+<h1>Tomarrow items</h1>
+<div th:each="item:${tomarrow}">
 	<p> ID: <span th:text="*{item.id}"></span></p>
 	<p> Title: <span th:text="*{item.title}"></span></p>
 	<p> Description: <span th:text="*{item.description}"></span></p>
@@ -88,6 +101,7 @@
                  <label th:text="${item.status}"></label>
                  </form>
 </div>
+
     
 
         

@@ -1,11 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
 </head>
 <body >
+ <style>
+    
+    
+    
+    .jumbotron {padding-top: 10px;
+            padding-bottom:0px;
+            background-size: cover;
+            background-color: black;
+            color: black;
+                        
+            }
+            
+    .buttoncolor { background-color: #500000;
+    }
+    
+    body {background-color: #A9A9A9;
+        margin: 0 auto;
+     }
+            
+    .col {
+   height: 200px;
+   width: 1000px;
+   border: 15px solid black;
+   padding: 10px;
+   background-color: gray;
+
+
+}
+    
+    </style>
+    
+     <div class="container">
+        <div class = "row">
+            <div class = "col-md-12 center-block">
+                <div class = "jumbotron col text-center">
 
 <h1>The ToDoList item Creator</h1>
+
+           </div>
+        </div>
+    </div>
+
 
 <form th:action="@{/NewItemCreated}" th:method="post" th:object="${toDoItem}">
 <div>
@@ -26,5 +67,13 @@
 </div>
 <button>Submit</button>
 </form>
+</div>
+
+
+    <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </body>
 </html>

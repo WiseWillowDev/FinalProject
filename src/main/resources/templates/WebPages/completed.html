@@ -1,12 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
 </head>
 <body >
 
+ <style>
+    
+    
+    
+    .jumbotron {padding-top: 10px;
+            padding-bottom:0px;
+            background-size: cover;
+            background-color: black;
+            color: black;
+                        
+            }
+            
+    .buttoncolor { background-color: #500000;
+    }
+    
+    body {background-color: #A9A9A9;
+        margin: 0 auto;
+     }
+            
+    .col {
+   height: 200px;
+   width: 1000px;
+   border: 15px solid black;
+   padding: 10px;
+   background-color: gray;
+
+
+}
+    
+    </style>
+    
+     <div class="container">
+        <div class = "row">
+            <div class = "col-md-12 center-block">
+                <div class = "jumbotron col text-center">
+
 <h1>To DO or NOT to DO!!!???</h1>
 <h4>that is the question</h4>
+
+           </div>
+        </div>
+    </div>
+
 
 <form th:action="@{/}" th:method="get">
 <button>Click to go home</button>
@@ -27,5 +69,12 @@
                  <label th:text="${item.status}"></label>
                  </form>
 </div>
+</div>
+
+ <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </body>
 </html>

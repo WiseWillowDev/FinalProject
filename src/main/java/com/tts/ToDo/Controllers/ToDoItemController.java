@@ -22,8 +22,10 @@ public class ToDoItemController {
 	public String IndexPageWithTheToDoList(Model model) {
 		model.addAttribute("time", toDoItemService.today());
 		model.addAttribute("Items", toDoItemService.getTodayItems());
+		model.addAttribute("tomarrow", toDoItemService.getDueTomarrow());
 
 		model.addAttribute("future" , toDoItemService.getFutureItems());
+		
 
 		return "WebPages/Index";
 	}
