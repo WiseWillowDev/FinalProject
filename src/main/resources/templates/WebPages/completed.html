@@ -68,6 +68,9 @@
 	<input type="checkbox"  onChange="submit()" checked/>
                  <label th:text="${item.status}"></label>
                  </form>
+                 <form th:method="get" th:action="@{'/EditPage/{id}'(id=${item.id})}">
+    <button type="submit">Click for Editing</button>
+    </form>
 </div>
 </div>
 

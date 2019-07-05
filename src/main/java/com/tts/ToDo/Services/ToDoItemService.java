@@ -19,8 +19,12 @@ public class ToDoItemService {
 //	add if statements in the html if there is no list
 //	complete, or not today, tomarrow, this week and future
 //	create the sorting function that handels it all
-	@Autowired
+	
 	private ToDoItemRepo toDoItemRepo;
+	@Autowired
+	public ToDoItemService(ToDoItemRepo repo) {
+		this.toDoItemRepo = repo;
+	}
 	
 	public void deleteById(long id) {
 		toDoItemRepo.deleteById(id);
@@ -167,7 +171,7 @@ public class ToDoItemService {
 	public List<ToDoItem> SortItemsByDate(List<ToDoItem> allItems){
 		List<ToDoItem> notSorted = allItems;
 		List<ToDoItem> sorted = new ArrayList<>();
-		int size = notSorted.size();
+		int size = notSorted.size(); 
 //		System.out.println("STARTING SORTING ALGOR!!!");
 //		System.out.println("The SIZE of the array is "  + notSorted.size());
 		for(int i = 0; i < size; i++) {

@@ -15,9 +15,13 @@ import com.tts.ToDo.Services.ToDoItemService;
 @Controller
 public class ToDoItemController {
 	
-	@Autowired
+	
 	private ToDoItemService toDoItemService;
 	
+	@Autowired
+	public ToDoItemController(ToDoItemService service) {
+		this.toDoItemService = service;
+	}
 	
 	@GetMapping("/")
 	public String IndexPageWithTheToDoList(Model model, ToDoItem toDoItem) {

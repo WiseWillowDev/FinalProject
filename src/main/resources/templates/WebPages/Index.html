@@ -7,25 +7,18 @@
 <body >
 
     <style>
-    
     .jumbotron {padding-top: 10px;
             padding-bottom:0px;
             background-size: cover;
             background-color: black;
             color: black;
                         
-     }
-            
-            
+     }   
     .buttoncolor { background-color: #500000;
     }
-    
-    
     body {background-color: #A9A9A9;
         margin: 0 auto;
-     }
-           
-            
+     }       
     .col {
    height: 200px;
    width: 1000px;
@@ -34,7 +27,6 @@
    background-color: gray;
 
 	}
-    
     </style>
     
     
@@ -103,6 +95,9 @@
 	<input type="checkbox"  onChange="submit()" checked/>
                  <label >It is Completed! </label>
                  </form>
+                 <form th:method="get" th:action="@{'/EditPage/{id}'(id=${item.id})}">
+    <button type="submit">Click for Editing</button>
+    </form>
 </div>
 </div>
 <h1>Tomarrow items</h1>
@@ -120,6 +115,9 @@
 	<input type="checkbox"  onChange="submit()"/>
                  <label th:text="${item.status}"></label>
                  </form>
+                 <form th:method="get" th:action="@{'/EditPage/{id}'(id=${item.id})}">
+    <button type="submit">Click for Editing</button>
+    </form>
 </div>
 <div th:if="${!future.empty}">
 <h1>Future Items</h1>
@@ -134,6 +132,9 @@
 	<input type="checkbox"  onChange="submit()"/>
                  <label th:text="${item.status}"></label>
                  </form>
+                 <form th:method="get" th:action="@{'/EditPage/{id}'(id=${item.id})}">
+    <button type="submit">Click for Editing</button>
+    </form>
 </div>
 </div>
 

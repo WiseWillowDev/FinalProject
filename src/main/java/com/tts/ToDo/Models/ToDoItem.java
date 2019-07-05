@@ -1,6 +1,8 @@
 package com.tts.ToDo.Models;
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -90,8 +92,8 @@ public class ToDoItem {
 	}
 
 
-	public void setDeadline(Date deadline) {
-		this.deadline = deadline;
+	public void setDeadline(Date today) {
+		this.deadline = today;
 	}
 	
 	
