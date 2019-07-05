@@ -8,22 +8,23 @@
 
     <style>
     
-    
-    
     .jumbotron {padding-top: 10px;
             padding-bottom:0px;
             background-size: cover;
             background-color: black;
             color: black;
                         
-            }
+     }
+            
             
     .buttoncolor { background-color: #500000;
     }
     
+    
     body {background-color: #A9A9A9;
         margin: 0 auto;
      }
+           
             
     .col {
    height: 200px;
@@ -32,10 +33,14 @@
    padding: 10px;
    background-color: gray;
 
-
-}
+	}
     
     </style>
+    
+    
+    
+    
+    
     <div class="container">
         <div class = "row">
             <div class = "col-md-12 center-block">
@@ -60,9 +65,16 @@
 			
 			
 		</form>
+		
 <h1>ShOuLd YoU dO iT?</h1>
-<h4><span th:text="${time}"></span></h4>
-
+<h4>Todays date is: <span th:text="${time}"></span></h4>
+<h1>Today's items</h1>
+<div th:if="${Items.empty && !Finished.empty}">
+<p> You have no more items for today</p>
+</div>
+<div th:if="${Items.empty && Finished.empty}">
+<p> You have no items for today </p>
+</div>
 <div th:each="item:${Items}">
 	<p> ID: <span th:text="*{item.id}"></span></p>
 	<p> Title: <span th:text="*{item.title}"></span></p>
@@ -72,10 +84,31 @@
 	
 	<form th:method="put" th:action="@{'/completed/{id}'(id=${item.id})}">
 	<input type="checkbox"  onChange="submit()"/>
-                 <label th:text="${item.status}"></label>
+                 <label>Is it Completed yet?</label>
+                 </form>
+    <form th:method="get" th:action="@{'/EditPage/{id}'(id=${item.id})}">
+    <button type="submit">Click for Editing</button>
+    </form>
+</div>
+<div th:if="${!Finished.empty}">
+<h1>Today's Finished! items</h1>
+<div th:each="item:${Finished}">
+	<p> ID: <span th:text="*{item.id}"></span></p>
+	<p> Title: <span th:text="*{item.title}"></span></p>
+	<p> Description: <span th:text="*{item.description}"></span></p>
+	<p> Status: <span th:text="*{item.status}"></span></p>
+	<p> Deadline: <span th:text="*{item.deadline}"></span></p>
+	
+	<form th:method="put" th:action="@{'/Oopsie/{id}'(id=${item.id})}">
+	<input type="checkbox"  onChange="submit()" checked/>
+                 <label >It is Completed! </label>
                  </form>
 </div>
+</div>
 <h1>Tomarrow items</h1>
+<div th:if="${tomarrow.empty}">
+<p> You have no items for tomarrow</p>
+</div>
 <div th:each="item:${tomarrow}">
 	<p> ID: <span th:text="*{item.id}"></span></p>
 	<p> Title: <span th:text="*{item.title}"></span></p>
@@ -88,6 +121,7 @@
                  <label th:text="${item.status}"></label>
                  </form>
 </div>
+<div th:if="${!future.empty}">
 <h1>Future Items</h1>
 <div th:each="item:${future}">
 	<p> ID: <span th:text="*{item.id}"></span></p>
@@ -101,25 +135,12 @@
                  <label th:text="${item.status}"></label>
                  </form>
 </div>
+</div>
 
-    
-
-        
     </div>    
     
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-
-
-
-
-    <script
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
-
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </body>
 </html>

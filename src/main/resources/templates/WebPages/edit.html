@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+</head>
+<body >
+     
+     <div class="container">
+        <div class = "row">
+            <div class = "col-md-12 center-block">
+                <div class = "jumbotron col text-center">
+
+<h1>The ToDoList item Editor</h1>
+
+           </div>
+        </div>
+    </div>
+
+
+ <form th:action="@{'/DoneEditing/{id}'(id=${toDoItem.id=id})}" th:method="put" th:object="${toDoItem}">
+<div>
+<label>Title:</label>
+<input th:field="*{title}" type="text" />
+</div>
+<div>
+<label>Description:</label>
+<input th:field="*{description}" type="text"/>
+</div>
+<div>
+<label>Creator:</label>
+<input th:field="*{creator}" type="text"/>
+</div>
+<div>
+<label>Deadline</label>
+<input th:field="*{deadline}" type="date"/>
+</div>
+<button>Submit</button>
+</form> 
+<h1>Or.......</h1>
+<form th:action="@{'/Deleted/{id}'(id=${toDoItem.id=id})}" th:method="delete">
+<button>Delete ME!!!!</button>
+</form>
+</div>
+
+
+    <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</body>
+</html>

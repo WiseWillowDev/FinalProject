@@ -1,5 +1,6 @@
 package com.tts.ToDo.Services;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,6 +21,10 @@ public class ToDoItemService {
 //	create the sorting function that handels it all
 	@Autowired
 	private ToDoItemRepo toDoItemRepo;
+	
+	public void deleteById(long id) {
+		toDoItemRepo.deleteById(id);
+	}
 	
 	public List<ToDoItem> findAll(){
 		return toDoItemRepo.findAll();
@@ -64,19 +69,18 @@ public class ToDoItemService {
 	
 	public List<ToDoItem> getTodayFinishedItems(){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
+	
 		List<ToDoItem> items = toDoItemRepo.findAll();
 		List<ToDoItem> todaysItems = new ArrayList<>();
 		for(int i = 0; i < items.size(); i++) {
 			String updated = sdf.format(items.get(i).getDeadline());
 			if(updated.equalsIgnoreCase(today()) && items.get(i).isStatus()) {
-			
+		
 				todaysItems.add(items.get(i));
 			} 
 
-			
-
 		}
+	
 		
 		return todaysItems;
 	}
@@ -129,26 +133,72 @@ public class ToDoItemService {
 		Calendar calendar = Calendar.getInstance();
 		Date date = calendar.getTime();
 		calendar.setTime(date);      
-		System.out.println("---------------------");
-		System.out.println(date);
+//		System.out.println("---------------------");
+//		System.out.println(date);
 		calendar.add(Calendar.DAY_OF_YEAR, noOfDays);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		System.out.println(calendar.getTime());
 		
-		System.out.println(calendar);
-		System.out.println(calendar.getTime());
 		for(int i = 0; i < items.size(); i ++) {
-			if(items.get(i).getDeadline().compareTo(calendar.getTime()) == 0) {
-				System.out.println("Did it");
+		
+			System.out.println(items.get(i).getDeadline());
+			String Stringdata = sdf.format(calendar.getTime());
+			Date formattedDate = calendar.getTime();
+			try {
+			formattedDate = sdf.parse(Stringdata);
+			} catch (ParseException e) {
+				e.printStackTrace();
+				
+			}
+//			System.out.println(formattedDate);
+			
+			if(items.get(i).getDeadline().compareTo(formattedDate) == 0) {
+//				System.out.println("Did it");
 				dueTomar.add(items.get(i));
 			}
+			
 		}
 		return dueTomar;
 		
-//		 Date date = Calendar.getInstance().getTime();
-//		 Calendar c = Calendar.getInstance();
-//		 c.setTime(date);
-//		 c.add(Calendar.WEEK_OF_MONTH, 2);
-//		 date = c.getTime();
+
 	}
+	
+	
+	public List<ToDoItem> SortItemsByDate(List<ToDoItem> allItems){
+		List<ToDoItem> notSorted = allItems;
+		List<ToDoItem> sorted = new ArrayList<>();
+		int size = notSorted.size();
+//		System.out.println("STARTING SORTING ALGOR!!!");
+//		System.out.println("The SIZE of the array is "  + notSorted.size());
+		for(int i = 0; i < size; i++) {
+			
+//			System.out.println("i = " + i);
+			int holder = 0;
+			Date smallestDate = notSorted.get(holder).getDeadline();
+			
+			
+			for(int y = 0; y < notSorted.size(); y++) {
+//				System.out.println("y = " + y);
+				if(notSorted.get(y).getDeadline().compareTo(smallestDate) < 0) {
+//					System.out.println("FOUND IT!!");
+					smallestDate = notSorted.get(y).getDeadline();
+					holder = y;
+				} else {
+//					System.out.println("Didnt Find anyhting");
+				}
+				
+			}
+//			System.out.println("Adding " + notSorted.get(holder).getId() + " at index of " + holder);
+			sorted.add(notSorted.get(holder));
+			notSorted.remove(holder);
+		}
+//		System.out.println("This is the size of the array " + notSorted.size());
+		
+		
+		return sorted;
+	}
+	
+
 	
 	
 
